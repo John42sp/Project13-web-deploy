@@ -1,0 +1,174 @@
+  /* SEMPRE COLOCAR DIMENSSÕES DE TELA NA ORDEM VW -> VH PRA FUNCIONAR, INVERSO NÃO FUNCIONA */
+#page-map {
+    width: 100vw;  
+    height: 100vh;
+
+    position: relative;
+    display: flex;
+    overflow: auto;
+}
+
+#page-map aside {
+    width: 400px;
+    background: linear-gradient(329.54deg, #29B6D1 0%, #00C7C7 100%);
+    padding: 55px 75px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width: 1024px) {
+    #page-map aside {
+        width: 280px;
+        padding: 55px 35px;   
+    }
+    #page-map aside h1 {
+        font-size: 36px;  
+    }
+    #page-map aside p {
+        font-size: 26px;  
+    }
+  }
+
+
+#page-map aside h2 {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 36px;
+    margin-top: 34px;
+}
+
+#page-map aside p {
+    line-height: 28px;
+    margin-top: 24px;
+}
+
+#page-map aside footer {
+    display: flex;
+    flex-direction: column;
+
+    line-height: 24px;    
+}
+
+@media only screen and (max-width: 414px) {
+    #page-map aside  {
+        height: 100vh;
+        overflow: hidden;      
+        padding: 15px 15px;  
+    }
+
+    #page-map aside h1 {
+        font-size: 32px;  
+        line-height: 34px;
+    }
+
+    #page-map aside h2 {
+        font-size: 30px;  
+        line-height: 28px;
+    }
+
+    #page-map aside p {
+        font-size: 26px;  
+        line-height: 24px;
+    }
+
+    #page-map aside strong  {
+        margin-top: 15px;      
+    }
+   
+  }
+
+  @media only screen and (max-width: 375px) {
+    /* #page-map aside {
+        width: 100%; 
+    } */
+    #page-map aside img {
+        height: 32px; 
+    }
+    #page-map aside h2 {
+        margin-top: 15px;    
+        font-size: 26px;  
+        line-height: normal;
+    }
+
+    #page-map aside p {
+        margin-top: 10px;    
+        font-size: 22px;  
+    }
+   
+  }
+
+#page-map aside footer strong {
+    font-weight: 800;
+}
+
+#page-map aside footer button {
+    margin-top: 20px;
+    padding: 5px 15px;
+    border-radius: 5px;
+    border-style: 0;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 800;
+    background-color: #3CDC8C;
+}
+
+#page-map .leaflet-container { /* .leaflet-container = div gerada automaticamente em volta do map*/
+    z-index: 5;
+}
+
+#page-map .create-orphanage {  /* elemento como o mapa, porem foi colocado por cima com z-index*/ 
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    width: 60px;
+    height: 60px;
+    background: #15c3d6;
+    border-radius: 20px;
+
+    z-index: 10;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: background-color 0.2s;
+}
+
+#page-map .create-orphanage:hover {
+    background: #17d6eb;
+}
+
+#page-map .map-popup .leaflet-popup-content-wrapper {
+    background-attachment: rgba(255, 255, 255);
+    opacity: 0.7;
+    border-radius: 20px;
+    box-shadow: none;
+}
+
+#page-map .map-popup .leaflet-popup-content {
+    color: #0089a5;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 5px 8px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#page-map .map-popup .leaflet-popup-content a {
+    width: 30px;
+    height: 30px;
+    background: #15c3d6;
+    box-shadow: 17px 27px 41px rgba(23, 142, 163, 0.16);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#page-map .map-popup .leaflet-popup-tip-container {
+    display: none;
+}

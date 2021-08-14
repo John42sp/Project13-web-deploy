@@ -1,0 +1,51 @@
+button.primary-button {
+    margin-top: 24px;
+  
+    width: 80%;
+    margin-left: 10%;
+    height: 45px;
+    border: 0;
+    cursor: pointer;
+    background: #3CDC8C;
+    border-radius: 20px;
+    color: #FFFFFF;
+    font-weight: 800;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    transition: background-color 0.2s;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    button.primary-button {   
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    button.primary-button {   
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  @media only screen and (max-width: 414px) {
+    button.primary-button {   
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  
+  button.primary-button svg {
+    margin-right: 16px;
+  }
+  
+  button.primary-button:hover {
+    background: #36CF82;
+  }
