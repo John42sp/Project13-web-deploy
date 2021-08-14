@@ -12,7 +12,7 @@ import axios from 'axios';
 
     async function handleForgot(e: FormEvent) {
       e.preventDefault();    
-      await axios.post('http://localhost:3333/users/forgotpass', { email})
+      await axios.post('https://project13-server-deploy.herokuapp.com/users/forgotpass', { email})
       history.push('/'); 
     
     }   

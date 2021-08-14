@@ -15,7 +15,7 @@ import axios from 'axios';
     async function handleLogin(e: FormEvent) {
       e.preventDefault();    
       setError(null)
-          await axios.post('http://localhost:3333/users/login', { email, password })//fazer chamada na api
+          await axios.post('https://project13-server-deploy.herokuapp.com/users/login', { email, password })//fazer chamada na api
       .then(response => {
       const { token, user } = response.data;    
       // console.log(response.data);    
