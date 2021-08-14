@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getToken } from "./auth";
 
 const apiFile = axios.create({
-    baseURL: "http://localhost:3333",
+    baseURL: "https://project13-server-deploy.herokuapp.com",
     headers: {
       'content-type': 'multipart/form-data',
       'Access-Control-Allow-Origin' : '*',
