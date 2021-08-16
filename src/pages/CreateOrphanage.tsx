@@ -108,8 +108,8 @@ const history = useHistory();
   })
 
  await api.post('/orphanages/create', data, {
-  //  headers: { user_id: user.id , user_name: user.name }
-  headers: { id }
+   headers: { user_id: user.id , user_name: user.name }
+  // headers: { id }
  });
   alert('Cadastrado com sucesso');
   setUserSession(token, user);  
