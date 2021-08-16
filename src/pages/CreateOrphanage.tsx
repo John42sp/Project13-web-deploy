@@ -15,7 +15,7 @@ import { getUser, setUserSession, removeUserSession, getToken } from "../service
 import 'leaflet/dist/leaflet.css';
 import '../styles/pages/create-orphanage.css';
 
-import apiFile from '../services/apiFile';
+import api from '../services/api';
 import { useHistory } from 'react-router-dom';
 import { createEmitAndSemanticDiagnosticsBuilderProgram } from "typescript";
 
@@ -43,8 +43,8 @@ const history = useHistory();
  const token = getToken();
  const user = getUser(); 
  
- console.log(user)
- const { name  } = user; 
+//  console.log(user)
+ const { id, name  } = user; 
 
  function AddMarkerToClick() {  
    useMapEvents({
@@ -96,7 +96,7 @@ const history = useHistory();
   data.append('instructions', instructions);
   data.append('opening_hours', openingHours);
   data.append('open_on_weekends', String(openOnWeekends));
-  // data.append('user_name', String(userName));
+  data.append('user_name', String(userName));
 
 
   images.forEach(image => {
@@ -107,8 +107,9 @@ const history = useHistory();
     data.append('videos', video)
   })
 
- await apiFile.post('orphanages/create', data, {
-   headers: { user_id: user.id , user_name: user.name }
+ await api.post('orphanages/create', data, {
+  //  headers: { user_id: user.id , user_name: user.name }
+  headers: { id }
  });
   alert('Cadastrado com sucesso');
   setUserSession(token, user);  

@@ -3,6 +3,7 @@ import { getToken } from "./auth";
 
 const apiFile = axios.create({
     baseURL: "https://project13-server-deploy.herokuapp.com",
+  
     headers: {
       'content-type': 'multipart/form-data',
       'Access-Control-Allow-Origin' : '*',
