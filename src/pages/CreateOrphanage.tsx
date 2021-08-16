@@ -38,12 +38,12 @@ const history = useHistory();
  const [ videos, setVideos ] = useState<File[]>([]);
  const [ previewVideos, setPreviewVideos ] = useState<string[]>([]);
  const [ loading, setLoading ] = useState(false);
- const [ userName, setUserName ] = useState('');
+//  const [ userName, setUserName ] = useState('');
 
  const token = getToken();
  const user = getUser(); 
  
-//  console.log(user)
+ console.log(user)
  const { id, name  } = user; 
 
  function AddMarkerToClick() {  
@@ -73,7 +73,7 @@ const history = useHistory();
   const { latitude, longitude } = position;
 
   // setUserId(id)
-  setUserName(name)
+  // setUserName(name)
 
   // const data = {
   //   name,
@@ -96,7 +96,7 @@ const history = useHistory();
   data.append('instructions', instructions);
   data.append('opening_hours', openingHours);
   data.append('open_on_weekends', String(openOnWeekends));
-  data.append('user_name', String(userName));
+  // data.append('user_name', String(userName));
 
 
   images.forEach(image => {
@@ -108,8 +108,8 @@ const history = useHistory();
   })
 
  await api.post('orphanages/create', data, {
-  //  headers: { user_id: user.id , user_name: user.name }
-  headers: { id }
+   headers: { user_id: user.id , user_name: user.name }
+  // headers: { id }
  });
   alert('Cadastrado com sucesso');
   setUserSession(token, user);  
