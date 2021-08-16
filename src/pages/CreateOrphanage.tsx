@@ -43,8 +43,8 @@ const history = useHistory();
  const token = getToken();
  const user = getUser(); 
  
-//  console.log(user)
- const { id, name  } = user; 
+ console.log(user)
+ const { name  } = user; 
 
  function AddMarkerToClick() {  
    useMapEvents({
