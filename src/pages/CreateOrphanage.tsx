@@ -15,7 +15,7 @@ import { getUser, setUserSession, removeUserSession, getToken } from "../service
 import 'leaflet/dist/leaflet.css';
 import '../styles/pages/create-orphanage.css';
 
-import api from '../services/api';
+import apiFile from '../services/apiFile';
 import { useHistory } from 'react-router-dom';
 import { createEmitAndSemanticDiagnosticsBuilderProgram } from "typescript";
 
@@ -107,7 +107,7 @@ const history = useHistory();
     data.append('videos', video)
   })
 
- await api.post('orphanages/create', data, {
+ await apiFile.post('/orphanages/create', data, {
    headers: { user_id: user.id , user_name: user.name }
   // headers: { id }
  });

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { getToken } from "./auth";
 
 const api = axios.create({
-    baseURL: "https://project13-server-deploy.herokuapp.com"
+    baseURL: "https://project13-server-deploy.herokuapp.com/"
 });
 
 
