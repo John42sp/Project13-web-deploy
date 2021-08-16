@@ -96,7 +96,7 @@ const history = useHistory();
   data.append('instructions', instructions);
   data.append('opening_hours', openingHours);
   data.append('open_on_weekends', String(openOnWeekends));
-  data.append('user_name', String(userName));
+  // data.append('user_name', String(userName));
 
 
   images.forEach(image => {
