@@ -3,7 +3,7 @@ import { Link, withRouter, useHistory } from "react-router-dom";
 import PrimaryButton from "../components/PrimaryButton";
 import { setUserSession } from "../services/auth";
 import '../styles/pages/welcome.css';
-import axios from 'axios';
+import api from '../services/api';
 
  function Login() {       
     const history = useHistory();
@@ -15,15 +15,33 @@ import axios from 'axios';
     async function handleLogin(e: FormEvent) {
       e.preventDefault();    
       setError(null)
-          await axios.post('https://project13-server-deploy.herokuapp.com/users/login', { email, password })//fazer chamada na api
-      .then(response => {
+      try {
+    
+      const response = await api.post('/users/login', { email, password });       
+
       const { token, user } = response.data;    
-      // console.log(response.data);    
       
       setUserSession(token, user);   // para salvar id do usuário no navegador
       history.push('/landing');        //executa a propriedade levando para a rota/pag. dashboard  
-      })      
+        
+      } catch (error) {
+        if (error.response) {
+          // console.log(error.response.data);
+          // console.log(error.response.status);     
+          alert(error.response.status + " - " + error.response.data)
+          setEmail('');
+          setPassword('');
+
+      } else if (error.request) {
+        // console.log(error.request);
+        alert(error.request)
+      } else {
+        // Something happened in setting up the request and triggered an Error
+        // console.log('Error', error.message);
+        alert(error.message)
+      }         
     }   
+  }
      
     return (
       <>        
@@ -35,25 +53,26 @@ import axios from 'axios';
                 <input 
                   name="email" 
                   id="email" 
-                  placeholder= "Seu email"
+                  placeholder= "Your email"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   required />
               </div>
               <div className="input-block">
-                <label htmlFor="password">Senha</label>
+                <label htmlFor="password">Password</label>
                 <input 
                   name="password" 
                   id="password" 
-                  placeholder= "Sua senha"
+                  placeholder= "Your password"
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   required />
               </div>                                                         
-              <PrimaryButton type="submit" >Entrar</PrimaryButton>    
+              <PrimaryButton type="submit" >Enter</PrimaryButton>    
 
-              <a href="/users/forgotpass" id="forgotLink">Esqueci a senha</a>
-          
+              <Link to='/users/new' id="registerLink" >Register</Link>
+              
+              <Link to="/users/forgotpass" id="forgotLink">Forgot password</Link>                       
 
             </form>  
             

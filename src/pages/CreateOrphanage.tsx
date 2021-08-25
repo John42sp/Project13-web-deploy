@@ -15,7 +15,7 @@ import { getUser, setUserSession, removeUserSession, getToken } from "../service
 import 'leaflet/dist/leaflet.css';
 import '../styles/pages/create-orphanage.css';
 
-import api from '../services/api';
+import apiFile from '../services/apiFile';
 import { useHistory } from 'react-router-dom';
 import { createEmitAndSemanticDiagnosticsBuilderProgram } from "typescript";
 
@@ -43,7 +43,7 @@ const history = useHistory();
  const token = getToken();
  const user = getUser(); 
  
- console.log(user)
+//  console.log(user)
  const { id, name  } = user; 
 
  function AddMarkerToClick() {  
@@ -72,21 +72,6 @@ const history = useHistory();
 
   const { latitude, longitude } = position;
 
-  // setUserId(id)
-  setUserName(name)
-
-  // const data = {
-  //   name,
-  //   latitude, 
-  //   longitude,
-  //   openOnWeekends,
-  //   images,
-  //   userId
-  // }
-
-  // console.log(position)
-  // console.log(data)
-
   const data = new FormData();
 
   data.append('name', orphName);
@@ -107,89 +92,15 @@ const history = useHistory();
     data.append('videos', video)
   })
 
- await api.post('orphanages/create', data, {
+ const response = await apiFile.post('orphanages/create', data, {
    headers: { user_id: user.id , user_name: user.name }
   // headers: { id }
  });
-  alert('Cadastrado com sucesso');
+  alert(response.data);
   setUserSession(token, user);  
   history.push('/app');
  }
 
-//  PREVIER POR LOCAL STORAGE : https://codepen.io/thbwd/pen/nKwcx
-//consegui colocar objetos de imagens no local storage e extrair. Não consegui nos estados  images / previewImages...
-// var imagesObject:File[] = [];
-// function handleSelectImages(evt: ChangeEvent<HTMLInputElement>) {
-//     var files = evt.target.files; // FileList object
-//     if(!files) {
-//       return;
-//     }
-//     // Loop through the FileList and render image files as thumbnails.
-//     for (var i = 0, f; f = files[i]; i++) {
-
-//       // Only process image files.
-//       if (!f.type.match('image.*')) {
-//         continue;
-//       }
-
-//       var reader = new FileReader();
-
-//       // Closure to capture the file information.
-//       reader.onload = function(evt: any) {
-//         var imageStorage = JSON.parse(localStorage.getItem("images") as any );
-//         console.log(imageStorage)
-//           displayImgData(evt.target.result)
-//           addImage(evt.target.result);
-//       };
-
-//       reader.readAsDataURL(f);
-//     }
-//     loadFromLocalStorage();
-// }
-
-// function loadFromLocalStorage(){
-//   var imageStorage = JSON.parse(localStorage.getItem("images") as any );
-// console.log(imageStorage)
-//   if(imageStorage && imageStorage.length > 0){
-//     // imagesObject = imageStorage;
-    
-//     // displayNumberOfImgs();
-//     imageStorage.forEach(displayImgData);
-//   }
-// }
-
-// function addImage(imgData: File[]){
-//   imagesObject.push(imgData as any);
-//   console.log(imagesObject)
-//   setImages(imagesObject)
-//   // {console.log(previewImages)}
-//   // displayNumberOfImgs();
-//   localStorage.setItem("images", JSON.stringify(imagesObject));
-// }
-
-// function displayImgData(imgData: string[]){
-//   // console.log(imgData)
-//   setPreviewImages(imgData)
-//   // var span = document.createElement('span');
-//   // span.innerHTML = '<img class="thumb" src="' + imgData + '"/>';
-//   // document.getElementById('list').insertBefore(span, null);
-// }
-
-
-
-// function handleSelectImages(event: ChangeEvent<HTMLInputElement>) {
-//   if(!event.target.files) {  //filelist
-//     return;
-//   }
-//   const selectedImages = Array.from(event.target.files)  //changes filelist to array of files
-
-//   setImages(selectedImages)
-
-//   const selectedImagesPreview = selectedImages.map(image => {
-//     return URL.createObjectURL(image);
-//   })
-//   setPreviewImages(selectedImagesPreview);
-// }
 
 //Library ver react-images-upload: provides image preview and validation upload (done below manually)
 
@@ -280,26 +191,27 @@ function delVidPreview(index:number) {
         <form  onSubmit={handleSubmit}  className="create-orphanage-form">
           <fieldset>
             <h3>{user.name}</h3>
-            <legend>Dados</legend>                 
+            <legend>Data</legend>                 
             <Map  style={{ width: '100%', height: 280 }} className="map">
               <AddMarkerToClick />
             </Map>
        
             <div className="input-block">
-              <label htmlFor="name">Nome</label>
+              <label htmlFor="name">Name</label>
               <input id="name" value={orphName} onChange={e =>setOrphName(e.target.value)} 
-              placeholder="Nome do orphanato" />
+              placeholder="Orphanage name" />
             </div>
 
             <div className="input-block">
-              <label htmlFor="about" >Sobre</label>
+              <label htmlFor="about" >About</label>
               <textarea id="name" value={about} onChange={e =>setAbout(e.target.value)} maxLength={300} 
-              placeholder="Máximo de 300 caracteres"/>
+              placeholder="300 caracters limit"/>
             </div>
             
             <div className="input-block">
-              <label htmlFor="images">Fotos</label>
-              <p>* Maximo 5 arquivos de até 1 megabyte em formato paisagem *</p>
+              <label htmlFor="images">Photo upload</label>
+              <p>* Limit of 5 files of 1 megabyte in landscape format *</p>
+
               <div className="images-container">
                 
 
@@ -340,7 +252,8 @@ function delVidPreview(index:number) {
 
             <div className="input-block">
               <label htmlFor="videos">Videos</label>
-              <p>* Maximo 3 arquivos de até 200 megabytes em formato paisagem. *</p>
+              <p>* Limit of 3 files of 200 megabytes, in landscape format. *</p>
+
               <div className="videos-container">
                 {previewVideos.map((video, itx) => {   
                               
@@ -379,40 +292,40 @@ function delVidPreview(index:number) {
           </fieldset>
 
           <fieldset>
-            <legend>Visitação</legend>
+            <legend>Visitation</legend>
 
             <div className="input-block">
-              <label htmlFor="instructions">Instruções</label>
-              <textarea id="instructions" value={instructions} onChange={e =>setInstructions(e.target.value)}placeholder="Descreva instruções para visitação" />
+              <label htmlFor="instructions">Instructions</label>
+              <textarea id="instructions" value={instructions} onChange={e =>setInstructions(e.target.value)}placeholder="Describe instructions" />
             </div>
 
             <div className="input-block">
-              <label htmlFor="opening_hours">Horários</label>
+              <label htmlFor="opening_hours">Hours</label>
               <input id="opening_hours" value={openingHours} onChange={e =>setOpeningHours(e.target.value)}
-              placeholder="Horários abertos"/>
+              placeholder="Opening hours"/>
             </div>
 
             <div className="input-block">
-              <label htmlFor="open_on_weekends">Atende fim de semana</label>
+              <label htmlFor="open_on_weekends">Opne on the weekends?</label>
 
               <div className="button-select">
                 <button 
                   type="button" 
                   className={openOnWeekends ? "active" : ''}
                   onClick={() =>{setOpenOnWeekends(true)}}>
-                    Sim
+                    Yes
                 </button>
                 <button 
                   type="button" 
                   className={!openOnWeekends ? "active" : ''}
                   onClick={() =>{setOpenOnWeekends(false)}}>
-                    Não
+                    No
                 </button>
               </div>
             </div>
           </fieldset>
 
-          <PrimaryButton type="submit">Confirmar</PrimaryButton>
+          <PrimaryButton type="submit">Confirm</PrimaryButton>
         </form>
       </main>
     </div>

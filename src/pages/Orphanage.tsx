@@ -57,8 +57,8 @@ export default function Orphanage() {
           setOrphanage(response.data);
       })
   },[params.id]);
-
-
+  
+  
   if(!orphanage){
     // return <p className="loading">loading...just a sec.</p>
     return <img 
@@ -76,14 +76,14 @@ export default function Orphanage() {
       <div className="orphanage-details">
         <h1>{orphanage.name}</h1>   
 
-        <h3>Galeria de fotos:</h3>
+        <h3>Photo Gallery:</h3>
         {(!orphanage.images) ? (
           <img style={{marginLeft: '35%', marginTop: '30%', width: '30%' }}  src={loadingCircle} />
           ) :
         (
         <img src={orphanage.images[activeImageIndex].url} alt={orphanage.name} />
         )}
-        <p>* Selecione imagem para display. *</p>
+        <p>* Select a pic for display. *</p>
         <div className="images">
             {orphanage.images.map((image, index) => {
               return (
@@ -103,13 +103,17 @@ export default function Orphanage() {
         </div>
         
     
-        <h3>Galeria de videos:</h3>
+        <h3>Video Galery:</h3>
+        
         {!orphanage.videos ? ( 
            <img style={{marginLeft: '35%', marginTop: '30%', width: '30%' }}  src={loadingCircle} />
          ) : (
-          <video src={orphanage.videos[activeVideoIndex].url} controls />
+          // <video  controls autoPlay loop muted >
+          //   <source src={orphanage.videos[activeVideoIndex].url} type="video/mp4" ></source>
+          // </video>
+          <video src={orphanage.videos[activeVideoIndex].url} controls autoPlay loop muted/>
          )}
-        <p>* Selecione video para play. *</p>
+        <p>* Select video for play. *</p>
         <div className="videos">
             {orphanage.videos.map((video, index) => {
               return (
@@ -121,14 +125,14 @@ export default function Orphanage() {
                     setActiveVideoIndex(index);
                   }}
                   >                    
-                <video src={video.url} />
+                <video src={video.url} ></video>
                 </button>
                 )       
             })}
         </div>
         
         <div className="orphanage-details-content">
-        <h2>Sobre o {orphanage.name}</h2>
+        <h2>About the  {orphanage.name}</h2>
           <p>{orphanage.about}</p>
 
           <div className="map-container">
@@ -150,34 +154,34 @@ export default function Orphanage() {
 
           <hr />
 
-          <h2>Instruções para visita</h2>
+          <h2>Visitation instructions</h2>
           <p>{orphanage.instructions}</p>
 
           <div className="open-details">
             <div className="hour">
               <FiClock size={32} color="#15B6D6" />
-            Segunda a Sexta <br />
+            Monday to friday <br />
             {orphanage.opening_hours}
             </div>
 
           {orphanage.opened_on_weekends ? (
                 <div className="open-on-weekends">
                 <FiInfo size={32} color="#39CC83" />
-                Atendemos <br />
-                fim de semana
+                We are pen <br />
+                on the weekends
               </div> )
               :  (            
                <div className="open-on-weekends dont-open" >
               <FiInfo size={32} color="#FF669D" />
-              Não atendemos <br />
-                fim de semana
+              We are closed <br />
+                on the weekends
             </div>)}
 
           </div>
 
           <PrimaryButton type="button">
             <FaWhatsapp size={30} color="#FFF" />
-            Entrar em contato
+            Get in touch
           </PrimaryButton>
         </div>
         

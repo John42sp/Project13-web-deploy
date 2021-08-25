@@ -10,6 +10,8 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import CreateOrphanage from './pages/CreateOrphanage';
 import ForgotPass from './pages/ForgotPass';
+import ChangePassword from './pages/ChangePassword';
+import ResendToken from './pages/ResendToken';
 
 
 const isAuth = () => {
@@ -39,9 +41,13 @@ const Routes = () => (
                 <Route path="/users/new" component={Register}/>
                 <Route path="/users/login" component={Login}/>
                 <Route path="/users/forgotpass" component={ForgotPass}/>
+                <Route path="/users/resendtoken" component={ResendToken}/>
+
                 
                 {/* logged in */}
                 <Route path="/landing" component={Landing}/>
+                <Route path="/users/changepass" component={ChangePassword}/>
+
                 <Route path="/app"  component={OrphanagesMap}/>
                 <Route path="/orphanages/create"  component={CreateOrphanage}/>
                 <Route path="/orphanages/:id"  component={Orphanage}/>                

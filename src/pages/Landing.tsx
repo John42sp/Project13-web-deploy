@@ -27,6 +27,11 @@ export default function Landing() {
     history.push('/');
   }
 
+  const changePassword = () => {    
+    setUserSession(token, user);
+    history.push('/users/changepass');
+  }
+
     return (
         <div id="page-landing">      
 
@@ -34,8 +39,8 @@ export default function Landing() {
           <img src={logoImg} alt="Happy"/>
           
           <main>
-            <h1>Leve felicidade para o mundo</h1>
-            <p>Visite orfanatos e mude o dia de muitas crianças.</p>
+            <h1>Take joy and happiness to the world</h1>
+            <p>Visit orphanages and change the day of many kids. </p>
           </main>
   
           <div className="location">
@@ -49,7 +54,10 @@ export default function Landing() {
             </button>
           </div>
 
+        <button onClick={changePassword} className="logout">Change Password</button>
+
         <button onClick={logout} className="logout">Logout</button>
+
   
         </div>
   

@@ -21,13 +21,13 @@
 
   #page-welcome header {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     margin-bottom: 5%;
   }
 
   #page-welcome header legend {
-    font-size: 40px;
+    font-size: 60px;
     color: #ffffff;
     font-weight: 700;
   }
@@ -38,7 +38,7 @@
     align-items: center;
     position: relative;
     bottom: 20px;
-    margin-top: 10px;
+    /* margin-top: 10px; */
   }
 
   @media only screen and (max-width: 1024px) {
@@ -51,9 +51,7 @@
       bottom: 20px;
       margin-top: 20px;
     }
-    #page-welcome section aside,  #page-welcome section main {
-      width: 70%;
-   }
+
 
    #page-welcome #login, #page-welcome #register, #page-welcome #forgotPass {
     margin: 2px;
@@ -64,15 +62,18 @@
 
 #page-welcome aside  {
     width: 35%;
-    margin-right: 5%;
-    margin-bottom: 5%;
 }
 
 #page-welcome main  {
-    width: 45%;
-    margin-right: 5%;
-
+    width: 35%;
 }
+
+#page-welcome aside #welcomeImg {
+  width: 65%;
+  height: auto;
+}
+
+
 
 @media only screen and (max-width: 414px) {
   #page-welcome section aside, #page-welcome section main  {
@@ -84,19 +85,32 @@
     width: 90%;
   }
 }
+/* #register {
+  width: 40%;
+  margin: 0 auto;
+} */
 
 #login, #register, #forgotPass {
     background-color: aliceblue;
-    margin: 10px;
-    padding: 5% 0;
+    margin: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    border-radius: 5%;
+    border-radius: 10%;
     border: 1px solid #D3E2E5;
-    outline: none;
+    outline: none;    
 }
+
+#register, #forgotPass {
+  padding: 3%;
+}
+
+#login {
+  padding: 6%;
+
+}
+
 #login form, #register form, #forgotPass form {
     width: 80%;
 }
@@ -105,6 +119,10 @@
     font-size: 32px;
     line-height: 36px;
     color: #5C8599;
+}
+
+#forgotPass strong {
+  padding: 0 30px;
 }
 
 #login .input-block, #register .input-block, #forgotPass .input-block {
@@ -130,10 +148,22 @@
 }
 
 #login .input-block input[placeholder], #register .input-block input[placeholder], #forgotPass .input-block input[placeholder] { 
-  font-size: 14px;
+  font-size: 16px;
   color: #8FA7B3; 
   padding: 0 16px;
   opacity: 0.7;
+}
+
+#registerLink {
+  color: blue;
+  font-size: small;
+  font-weight: 800;
+  text-decoration: none;
+  justify-content: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  font-family: Nunito, sans-serif;
 }
 
 #forgotLink {
@@ -144,10 +174,11 @@
   justify-content: center;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 10px;
   font-family: Nunito, sans-serif;
-
 }
 
-
+#register .yup-error {
+  color: red;
+}
     

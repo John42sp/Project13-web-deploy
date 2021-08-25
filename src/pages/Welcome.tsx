@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/pages/welcome.css';
 import logoImg from '../assets/logo.svg';
+import welcomeImg from "../assets/landing-ilustra.svg";
+
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import '../styles/pages/welcome.css';
@@ -14,19 +16,17 @@ export default function Welcome() {
 
             <section>
                 <aside>
-                <header>
-                    <legend>Seja bem vindo!</legend>
-                </header>
-                    <Login />
-                    {/* <Link to='/users/login'>Faca seu Login</Link> */}
+                    <img id="welcomeImg" src={welcomeImg} alt="" />                
 
                 </aside> 
 
+                <main>               
 
-                <main>
-                    <Register />
-                    {/* <Link to='/users/new'>Faca seu cadastro</Link> */}
+                    <header>
+                        <legend>Welcome!</legend>
+                    </header>
 
+                    <Login />
                 </main>
 
             </section>

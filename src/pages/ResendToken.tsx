@@ -5,15 +5,15 @@ import '../styles/pages/welcome.css';
 import axios from 'axios';
 import api from '../services/api';
 
- function ForgotPass() {       
+ function ResendToken() {       
     const history = useHistory();
 
     const [email, setEmail] = useState('');
  
-    async function handleForgot(e: FormEvent) {
+    async function handleResendToken(e: FormEvent) {
       e.preventDefault();    
-         await api.post('/users/forgotpass', { email})
-      alert('A new password has been sent to your mail box.')
+        await api.post('/users/resendtoken', { email})
+      alert(`A new verification email has been sent to ${email} mail box.`)
       history.push('/'); 
     
     }   
@@ -22,8 +22,8 @@ import api from '../services/api';
       <>     
         <div id="page-welcome" className="center">      
           <div id="forgotPass" >   
-              <strong>Password recovery</strong>
-              <form onSubmit={handleForgot}>                    
+              <strong>New verification email</strong>
+              <form onSubmit={handleResendToken}>                    
                 <div className="input-block">
                   <label htmlFor="email">E-mail</label>
                   <input 
@@ -32,12 +32,13 @@ import api from '../services/api';
                     placeholder= "Your email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                    required />
+                    required
+                  />
                 </div>
                                                                   
                 <PrimaryButton type="submit">Send</PrimaryButton>    
 
-                <a href="/" id="forgotLink">Back to Login</a>
+                <Link to="/" id="registerLink">Back to Login</Link>
             
 
               </form>  
@@ -50,4 +51,4 @@ import api from '../services/api';
 }
 
 
-export default withRouter(ForgotPass);
+export default withRouter(ResendToken);
